@@ -97,7 +97,7 @@ module XeroGateway
           when "consumer_key_unknown" then raise OAuth::TokenInvalid.new(description)
           when "token_rejected"       then raise OAuth::TokenInvalid.new(description)
           when "rate limit exceeded"  then raise OAuth::RateLimitExceeded.new(description)
-          else raise OAuth::UnknownError.new(error_details["oauth_problem"].first + ':' + description)
+          else raise OAuth::UnknownError.new( (error_details["oauth_problem"].first || "Uknown Error") + ':' + description)
         end
       end
 
